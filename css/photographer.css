@@ -6,6 +6,36 @@
     background-color: #FAFAFA;
     height: 300px;
     margin: 0 100px;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#informations {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#informations p {
+    font-size: 24px;
+    font-weight: 400;
+}
+
+h1#name {
+    color: #D3573C;
+    font-size: 64px;
+    font-weight: 400;
+    margin: 0;
+}
+
+#location {
+    color: #901C1C;
+}
+
+#tagline {
+    color: #525252;
 }
 
 .contact_button {
@@ -20,6 +50,14 @@
     border-radius: 5px;
     cursor: pointer;
 }
+
+#profilePicture {
+    width: 200px;
+    height: auto;
+    border-radius: 100%;
+
+}
+
 
 .modal {
     border-radius: 5px;

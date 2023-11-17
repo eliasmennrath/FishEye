@@ -53,9 +53,9 @@ h1#name {
 
 #profilePicture {
     width: 200px;
-    height: auto;
+    height: 200px;
+    object-fit: cover;
     border-radius: 100%;
-
 }
 
 
@@ -112,3 +112,48 @@ form input {
     border: none;
     border-radius: 5px;
 }
+
+
+#medias {
+    display: flex;
+}
+.media img, .media video {
+    width: 350px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 5px;
+    display: block;
+}
+
+.media-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.media-details * {
+    font-size: 1.8rem;
+    color: #901C1C;
+}
+
+.media-title {
+    font-weight: 400;
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.likes-number {
+    font-weight: 500;
+}
+
+.likes-heart {
+    width: 25px;
+    height: 25px;
+}
+
+.media-likes {
+    display: flex;
+    align-items: center;
+}
+

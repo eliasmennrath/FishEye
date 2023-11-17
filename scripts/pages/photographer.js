@@ -32,24 +32,33 @@ function getMedia(medias, photographer) {
         }
     });
 
-    console.log(photographerMedias);
+    return photographerMedias;
 }
 
 function displayData(photographer) {
     let { name, city, tagline, portrait } = photographer;
-    
+
     const title = document.getElementById('name');
-    const pLocation= document.getElementById('location');
-    const pTagline= document.getElementById('tagline');
-    const img = document.getElementById('profilePicture')
+    const pLocation = document.getElementById('location');
+    const pTagline = document.getElementById('tagline');
+    const img = document.getElementById('profilePicture');
 
     title.innerText = name;
     pLocation.innerText = city;
     pTagline.innerText = tagline;
-    img.setAttribute('src', 'assets/photographers/'+portrait);
+    img.setAttribute('src', 'assets/photographers/' + portrait);
     img.setAttribute('alt', 'Une photo de profil de ' + name);
 }
 
+function displayMedias(medias) {
+    let html = '';
+    medias.forEach(item => {
+        const media = new MediaFactory(item);
+        html += media.build();
+    });
+    const mediaSection = document.getElementById('medias');
+    mediaSection.innerHTML = html;
+}
 
 
 /**
@@ -69,6 +78,6 @@ fetch(url)
     const photographer = getPhotographer(photographers, id);
     const medias = getMedia(media, id);
     displayData(photographer);
-    // displayMedias(medias);
+    displayMedias(medias);
 });
 

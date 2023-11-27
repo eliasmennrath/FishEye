@@ -51,13 +51,20 @@ function displayData(photographer) {
 }
 
 function displayMedias(medias) {
-    let html = '';
+    const mediaSection = document.getElementById('medias');
     medias.forEach(item => {
         const media = new MediaFactory(item);
-        html += media.build();
-    });
-    const mediaSection = document.getElementById('medias');
-    mediaSection.innerHTML = html;
+        mediaSection.appendChild(media.build());
+    }); 
+}
+
+function getLikes(medias) {
+    totalLikes = 0;
+    medias.forEach(media => {
+        totalLikes = totalLikes + media.likes;
+    })
+
+    return totalLikes;
 }
 
 
@@ -74,10 +81,35 @@ fetch(url)
 .then(data => {
     const {photographers, media} = data;
 
+    // const id = getId();
+    // const photographer = getPhotographer(photographers, id);
+    // const medias = getMedia(media, id);
+    // displayData(photographer);
+    // displayMedias(medias);
+    
     const id = getId();
     const photographer = getPhotographer(photographers, id);
     const medias = getMedia(media, id);
     displayData(photographer);
     displayMedias(medias);
+
+    console.log(photographer);
+    document.getElementById('totalLikes').innerText = getLikes(medias);
+    document.getElementById('price').innerText = photographer.price + '€ / jour';
+
+    document.getElementById('contactName').innerText = photographer.name;
+
+    let test = Array.from(document.getElementsByClassName('media'));
+    test.forEach(item => {
+        item.addEventListener('click', function() {
+            console.log(this.id);
+        });
+    })
 });
+
+const displayContact = document.getElementById('contact_button');
+const contactModal = document.getElementById('contact_modal');
+displayContact.addEventListener('click', e => {
+    contactModal.style.display = block;
+})
 

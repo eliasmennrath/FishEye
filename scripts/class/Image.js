@@ -5,23 +5,51 @@ class Image extends Media {
     }
 
     build() {
-        // const article = document.createElement('article');
-        // const img = document.createElement('img');
-        // img.setAttribute('src', 'assets/medias/'+this.image);
+        const article = document.createElement('article');
+        article.classList.add('media');
+        article.setAttribute('id', this.id);
 
-        // article.appendChild(img);
+        const img = document.createElement('img');
+        img.setAttribute('src', 'assets/medias/'+this.image);
 
-        let article = `<article class="media">
-            <img src="assets/medias/${this.image}" alt="">
-            <div class="media-details">
-                <h2 class="media-title">${this.title}</h2>
-                <div class="media-likes">
-                    <span class="likes-number">${this.likes}</span>
-                    <i class="fa-solid fa-heart likes-heart"></i>
-                </div>
-            </div>
-        </article>`;
+        const details = document.createElement('div');
+        details.classList.add('media-details');
+
+        const title = document.createElement('h2');
+        title.classList.add('media-title');
+        title.innerText = this.title;
+
+        const likes = document.createElement('div');
+        likes.classList.add('media-likes');
+
+        const number = document.createElement('span');
+        number.classList.add('likes-number');
+        number.innerText = this.likes;
+
+        const icon = document.createElement('i');
+        icon.classList.add('fa-solid', 'fa-heart', 'likes-heart');
+        icon.addEventListener('click', e => {
+            this.checkLike();
+            number.innerText = this.likes;
+        });
+
+
+        likes.appendChild(number);
+        likes.appendChild(icon);
+
+        details.appendChild(title);
+        details.appendChild(likes);
+
+        article.appendChild(img);
+        article.appendChild(details);
+
+        article.addEventListener('click', e => {
+            console.log('Display LightboxImg');
+        })
 
         return article;
     }
 }
+
+// Changer pour createElement
+// Add eventListener dans build

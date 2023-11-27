@@ -5,20 +5,52 @@ class Video extends Media {
     }
 
     build() {
+        const article = document.createElement('article');
+        article.classList.add('media');
+        article.setAttribute('id', this.id);
+
+        const video = document.createElement('video');
+
+        const source = document.createElement('source');
+        source.setAttribute('src', 'assets/medias/'+this.video);
+
+        const details = document.createElement('div');
+        details.classList.add('media-details');
+
+        const title = document.createElement('h2');
+        title.classList.add('media-title');
+        title.innerText = this.title;
+
+        const likes = document.createElement('div');
+        likes.classList.add('media-likes');
+
+        const number = document.createElement('span');
+        number.classList.add('likes-number');
+        number.innerText = this.likes;
+
+        const icon = document.createElement('i');
+        icon.classList.add('fa-solid', 'fa-heart', 'likes-heart');
+        icon.addEventListener('click', e => {
+            this.checkLike();
+            number.innerText = this.likes;
+        });
 
 
-        let article = `<article class="media">
-            <video controls>
-                <source src="assets/medias/${this.video}" type="video/mp4">
-            </video>
-            <div class="media-details">
-                <h2 class="media-title">${this.title}</h2>
-                <div class="media-likes">
-                    <span class="likes-number">${this.likes}</span>
-                    <i class="fa-solid fa-heart likes-heart"></i>
-                </div>
-            </div>
-        </article>`;
+        likes.appendChild(number);
+        likes.appendChild(icon);
+
+        details.appendChild(title);
+        details.appendChild(likes);
+
+        video.appendChild(source);
+
+        article.appendChild(video);
+        article.appendChild(details);
+
+        article.addEventListener('click', e => {
+            console.log('Display LightboxVid');
+            this.openLightbox();
+        })
 
         return article;
     }

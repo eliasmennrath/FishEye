@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<link href="css/style.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" href="css/contact.css">
 		<meta charset="utf-8">
 		<link rel="icon" type="image/png" href="assets/favicon.png">
 		<link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
@@ -9,7 +10,7 @@
 	</head>
 	<body>
 		<header>
-			<img src="assets/images/logo.png" class="logo" />
+			<a href="/"><img src="assets/images/logo.png" class="logo" /></a>
 		</header>
 
 		<main id="main">
@@ -20,13 +21,22 @@
 					<p id="tagline"></p>
 				</div>
 
-				<button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+				<button class="contact_button" id="contact_button" onclick="displayModal()">Contactez-moi</button>
 	
 				<img src="" alt="" id="profilePicture">
 			</div>
 
+
+			<form action="">
+				<label for="sorting">Trier par</label>
+				<select name="sorting" id="sorting">
+					<option value="">Popularité</option>
+					<option value="">Date</option>
+					<option value="">Titre</option>
+				</select>
+			</form>
 			<section id="medias">
-				<article class="media">
+				<!-- <article class="media">
 					<img src="assets/medias/Animals_Rainbow.jpg" alt="">
 					<div class="media-details">
 						<h2 class="media-title">Hello</h2>
@@ -48,23 +58,42 @@
 							<i class="fa-solid fa-heart likes-heart"></i>
 						</div>
 					</div>
-				</article>
-
+				</article> -->
 			</section>
 
 
 		</main>
 
+		<div id="stats">
+			<div>
+				<span id="totalLikes"></span>
+				<i class="fa-solid fa-heart"></i>
+			</div>
+			<span id="price"></span>
+		</div>
+
 		<div id="contact_modal">
 			<div class="modal">
 				<header>
-					<h2>Contactez-moi</h2>
+					<h2>Contactez-moi <span id="contactName"></span></h2>
 					<img src="assets/icons/close.svg" onclick="closeModal()" />
 				</header>
 				<form>
 					<div>
-						<label>Prénom</label>
-						<input />
+						<label for="firstname">Prénom</label>
+						<input type="text" id="firstname" name="firstname"/>
+					</div>
+					<div>
+						<label for="lastname">Nom</label>
+						<input type="text" id="lastname" name="lastname"/>
+					</div>
+					<div>
+						<label for="email">Email</label>
+						<input type="email" id="email" name="email"/>
+					</div>
+					<div>
+						<label for="message">Message</label>
+						<textarea name="message" id="message" rows="5"></textarea>
 					</div>
 					<button class="contact_button">Envoyer</button>
 				</form>

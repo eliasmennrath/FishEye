@@ -8,6 +8,8 @@
     left: 0;
 
     background-color: rgba(0, 0, 0, .5);
+
+    z-index: 9;
 }
 
 .modal {
@@ -20,7 +22,7 @@
     padding: 35px;
     background-color: #DB8876;
     border-radius: 5px;
-    overflow: scroll;
+    overflow-y: scroll;
 
     position: absolute;
     top: 50%;
@@ -81,4 +83,22 @@ form textarea {
     resize: none;
     border: none;
     border-radius: 5px;
+}
+
+.invalid-msg {
+    display: none;
+    color: white;
+    background: red;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.invalid {
+    color: red;
+    border: 1px solid red;
+}
+.invalid ~ .invalid-msg {
+    display: initial;
 }

@@ -1,110 +1,137 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<link href="css/style.css" rel="stylesheet" type="text/css" />
-		<link rel="stylesheet" href="css/contact.css">
-		<meta charset="utf-8">
-		<link rel="icon" type="image/png" href="assets/favicon.png">
-		<link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-		<title>Fisheye - photographe </title>
-	</head>
-	<body>
-		<header>
-			<a href="/"><img src="assets/images/logo.png" class="logo" /></a>
-		</header>
+<html lang="fr">
 
-		<main id="main">
-			<div class="photograph-header">
-				<div id="informations">
-					<h1 id="name"></h1>
-					<p id="location"></p>
-					<p id="tagline"></p>
+<head>
+	<meta charset="utf-8">
+
+	<link rel="stylesheet" href="css/style.css" type="text/css">
+	<link rel="stylesheet" href="css/lightbox.css">
+	<link rel="stylesheet" href="css/contact.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap">
+	<link rel="icon" href="assets/favicon.png" type="image/png">
+
+	<title>Fisheye - photographe </title>
+</head>
+
+<body>
+	<header>
+		<a href="/">
+			<img src="assets/images/logo.png" class="logo" alt="logo Fisheye"/>
+		</a>
+	</header>
+
+
+	<main id="main">
+		<div class="photograph-header">
+			<div id="informations">
+				<h1 id="name"></h1>
+				<p id="location"></p>
+				<p id="tagline"></p>
+			</div>
+			<button class="contact_button" id="contact_button">Contactez-moi</button>
+			<img src="" alt="" id="profilePicture">
+		</div>
+
+		<div id="sorting">
+			<label for="textBox" id="sorting-title">Trier par</label>			
+			<div id="dropdown" tabindex="0" aria-label="Liste des options de tri">
+				<input type="text" id="textBox" placeholder="-" readonly tabindex="-1"> <!--Essayer disabled sinon remplacer element-->
+				<div id="options">
+					<div class="option" data-sorting="popularity" aria-label="Trier par popularité" tabindex="0">Popularité</div>
+					<hr>
+					<div class="option" data-sorting="date" aria-label="Trier par date" tabindex="0">Date</div>
+					<hr>
+					<div class="option" data-sorting="title" aria-label="Trier dans l'ordre alphabétique" tabindex="0">Titre</div>
 				</div>
+			</div>
+		</div>
 
-				<button class="contact_button" id="contact_button" onclick="displayModal()">Contactez-moi</button>
-	
-				<img src="" alt="" id="profilePicture">
+		<section id="medias">
+			<!-- contenu généré dynamiquement avec JS -->
+		</section>
+	</main>
+
+
+	<div id="stats">
+		<div>
+			<span id="totalLikes"></span>
+			<span class="fa-solid fa-heart"></span>
+		</div>
+		<span id="price"></span>
+	</div>
+
+
+	<div id="lightbox">
+		<div id="lightbox-content">
+			<div id="lightbox-close" aria-label="Fermer">
+				<div class="first"></div>
+				<div class="second"></div>
 			</div>
 
+			<div class="lightbox-controls" id="previous-media" aria-label="Passer à l'image précédente"></div>
 
-			<form action="">
-				<label for="sorting">Trier par</label>
-				<select name="sorting" id="sorting">
-					<option value="">Popularité</option>
-					<option value="">Date</option>
-					<option value="">Titre</option>
-				</select>
+			<div id="media">
+					<!-- contenu généré dynamiquement avec JS -->
+			</div>
+
+			<div class="lightbox-controls" id="next-media" aria-label="Passer à l'image suivante"></div>
+		</div>
+	</div>
+
+
+	<div id="contact_modal">
+		<div class="modal">
+			<header>
+				<h2>Contactez-moi <span id="contactName"></span></h2>
+				<img src="assets/icons/close.svg" alt="bouton de fermeture du formaulaire de contact" id="close-modal" />
+			</header>
+
+			<form id="contactForm">
+				<div>
+					<label for="firstname">Prénom</label>
+					<input type="text" id="firstname" name="firstname"/>
+					<span class="invalid-msg">Veuillez renseigner au minimum 2 caractères</span>
+				</div>
+				<div>
+					<label for="lastname">Nom</label>
+					<input type="text" id="lastname" name="lastname"/>
+					<span class="invalid-msg">Veuillez renseigner au minimum 2 caractères</span>
+				</div>
+				<div>
+					<label for="email">Email</label>
+					<input type="email" id="email" name="email"/>
+					<span class="invalid-msg">Veuillez renseigner une adresse email valide</span>
+				</div>
+				<div>
+					<label for="message">Message</label>
+					<textarea name="message" id="message" rows="5"></textarea>
+					<span class="invalid-msg">Ce champs ne peut pas être vide</span>
+				</div>
+				<button class="contact_button">Envoyer</button>
 			</form>
-			<section id="medias">
-				<!-- <article class="media">
-					<img src="assets/medias/Animals_Rainbow.jpg" alt="">
-					<div class="media-details">
-						<h2 class="media-title">Hello</h2>
-						<div class="media-likes">
-							<span class="likes-number">10</span>
-							<i class="fa-solid fa-heart likes-heart"></i>
-						</div>
-					</div>
-				</article>
-
-				<article class="media">
-					<video controls>
-						<source src="assets/medias/Animals_Wild_Horses_in_the_mountains.mp4" type="video/mp4">
-					</video>
-					<div class="media-details">
-						<h2 class="media-title">Hello</h2>
-						<div class="media-likes">
-							<span class="likes-number">10</span>
-							<i class="fa-solid fa-heart likes-heart"></i>
-						</div>
-					</div>
-				</article> -->
-			</section>
-
-
-		</main>
-
-		<div id="stats">
-			<div>
-				<span id="totalLikes"></span>
-				<i class="fa-solid fa-heart"></i>
-			</div>
-			<span id="price"></span>
 		</div>
+	</div>
 
-		<div id="contact_modal">
-			<div class="modal">
-				<header>
-					<h2>Contactez-moi <span id="contactName"></span></h2>
-					<img src="assets/icons/close.svg" onclick="closeModal()" />
-				</header>
-				<form>
-					<div>
-						<label for="firstname">Prénom</label>
-						<input type="text" id="firstname" name="firstname"/>
-					</div>
-					<div>
-						<label for="lastname">Nom</label>
-						<input type="text" id="lastname" name="lastname"/>
-					</div>
-					<div>
-						<label for="email">Email</label>
-						<input type="email" id="email" name="email"/>
-					</div>
-					<div>
-						<label for="message">Message</label>
-						<textarea name="message" id="message" rows="5"></textarea>
-					</div>
-					<button class="contact_button">Envoyer</button>
-				</form>
-			</div>
-		</div>
-		<script src="https://kit.fontawesome.com/c0b47a3539.js" crossorigin="anonymous"></script>
-		<script src="/scripts/class/Media.js"></script>
-		<script src="/scripts/class/Image.js"></script>
-		<script src="/scripts/class/Video.js"></script>
-		<script src="/scripts/factory/MediaFactory.js"></script>
-		<script src="/scripts/pages/photographer.js"></script>
-		<script src="/scripts/utils/contactForm.js"></script>
-	</body>
+
+
+<!-- FontAwesome's script -->
+	<script src="https://kit.fontawesome.com/c0b47a3539.js" crossorigin="anonymous"></script>
+
+<!-- Class -->
+	<script src="/scripts/class/Media.js"></script>
+	<script src="/scripts/class/Photo.js"></script>
+	<script src="/scripts/class/Video.js"></script>
+
+	<script src="/scripts/factory/MediaFactory.js"></script>
+
+<!-- Utils -->
+	<script src="/scripts/utils/contact.js"></script>
+	<script src="/scripts/utils/lightbox.js"></script>
+	<script src="/scripts/utils/sorting.js"></script>
+
+
+<!-- Script de la page -->
+	<script src="/scripts/pages/photographer.js"></script>
+
+</body>
 </html>

@@ -1,3 +1,4 @@
+// Build photographer's card in home page
 function photographerTemplate(data) {
     const { id, name, portrait, city, country, tagline, price } = data;
 
@@ -22,6 +23,8 @@ function photographerTemplate(data) {
         const article = document.createElement( 'article' );
         const img = document.createElement( 'img' );
         img.setAttribute("src", picture)
+        img.setAttribute('alt', 'Une photo de profil de ' + name);
+
         const h2 = document.createElement( 'h2' );
         h2.textContent = name;
 

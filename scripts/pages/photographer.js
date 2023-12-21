@@ -1,9 +1,8 @@
-// Code to the photographer page
-
 /**
  * Functions
  */
 
+// Get photographer's id
 function getId() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -12,6 +11,7 @@ function getId() {
     return id;
 }
 
+// Get photographer's information
 function getPhotographer(photographers, id) {
     let photographer;
 
@@ -24,6 +24,7 @@ function getPhotographer(photographers, id) {
     return photographer;
 }
 
+// Get photographer's medias
 function getMedia(medias, photographer) {
     let photographerMedias = [];
     medias.forEach(media => {
@@ -35,6 +36,7 @@ function getMedia(medias, photographer) {
     return photographerMedias;
 }
 
+// Display photographer's information
 function displayData(photographer) {
     let { name, city, tagline, portrait } = photographer;
 
@@ -50,6 +52,7 @@ function displayData(photographer) {
     img.setAttribute('alt', 'Une photo de profil de ' + name);
 }
 
+// Display photographer's medias
 function displayMedias(medias) {
     const mediaSection = document.getElementById('medias');
     medias.forEach(item => {
@@ -58,6 +61,7 @@ function displayMedias(medias) {
     }); 
 }
 
+// Get the total likes
 function getLikes(medias) {
     totalLikes = 0;
     medias.forEach(media => {
@@ -68,48 +72,45 @@ function getLikes(medias) {
 }
 
 
+
+
+
 /**
  * Code
  */
 
-const url = 'data/photographers.json';
+let medias = [];
+let index;
 
+const url = 'data/photographers.json';
 fetch(url)
 .then(response => {
     return response.json();
 })
 .then(data => {
     const {photographers, media} = data;
-
-    // const id = getId();
-    // const photographer = getPhotographer(photographers, id);
-    // const medias = getMedia(media, id);
-    // displayData(photographer);
-    // displayMedias(medias);
-    
     const id = getId();
     const photographer = getPhotographer(photographers, id);
-    const medias = getMedia(media, id);
+
+    medias = getMedia(media, id);
     displayData(photographer);
     displayMedias(medias);
+    createLightbox(medias);
 
-    console.log(photographer);
-    document.getElementById('totalLikes').innerText = getLikes(medias);
-    document.getElementById('price').innerText = photographer.price + '€ / jour';
 
+    // Display the statistics. Total likes + Price
+    let totalLikes = document.getElementById('totalLikes');
+    totalLikes.innerText = getLikes(medias);
+    totalLikes.setAttribute('aria-label', `${getLikes(medias)} j'aimes au total`)
+
+    let price = document.getElementById('price');
+    price.innerText = photographer.price + '€ / jour';
+    price.setAttribute('aria-label', `Tarif journalier : ${photographer.price}€`);
+
+    // Set photographer's name in contact modal
     document.getElementById('contactName').innerText = photographer.name;
-
-    let test = Array.from(document.getElementsByClassName('media'));
-    test.forEach(item => {
-        item.addEventListener('click', function() {
-            console.log(this.id);
-        });
-    })
 });
 
-const displayContact = document.getElementById('contact_button');
-const contactModal = document.getElementById('contact_modal');
-displayContact.addEventListener('click', e => {
-    contactModal.style.display = block;
-})
+
+
 

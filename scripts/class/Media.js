@@ -20,8 +20,4 @@ class Media {
         }
         this.isLiked = !this.isLiked;
     }
-
-    openLightbox(id) {
-        
-    }
 }

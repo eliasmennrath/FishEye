@@ -1,3 +1,5 @@
+"use strict";
+
 function init() {
     const url = 'data/photographers.json';
     fetch(url)

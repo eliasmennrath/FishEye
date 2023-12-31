@@ -1,3 +1,5 @@
+"use strict";
+
 class MediaFactory {
     constructor(data) {
         if('video' in data) {

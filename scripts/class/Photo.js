@@ -1,3 +1,5 @@
+"use strict";
+
 class Photo extends Media {
     constructor(data) {
         super(data);
@@ -5,19 +7,19 @@ class Photo extends Media {
     }
 
     build() {
-        const article = document.createElement('article');
-        article.classList.add('media');
-        article.setAttribute('id', this.id);
-        article.setAttribute('tabindex', 0);
-        article.setAttribute('aria-label', this.image);
+        const figure = document.createElement('figure');
+        figure.classList.add('media');
+        figure.setAttribute('id', this.id);
+        figure.setAttribute('tabindex', 0);
+        figure.setAttribute('aria-label', this.image);
 
         const img = document.createElement('img');
         img.setAttribute('src', 'assets/images/'+this.image);
         img.setAttribute('alt', this.title);
         img.classList.add('media-content');
 
-        const details = document.createElement('div');
-        details.classList.add('media-details');
+        const caption = document.createElement('figcaption');
+        caption.classList.add('media-caption');
 
         const title = document.createElement('h2');
         title.classList.add('media-title');
@@ -33,7 +35,8 @@ class Photo extends Media {
 
         const icon = document.createElement('span');
         icon.classList.add('fa-solid', 'fa-heart', 'likes-heart');
-        icon.addEventListener('click', () => {
+        icon.addEventListener('click', e => {
+            e.preventDefault();
             this.checkLike();
             number.innerText = this.likes;
         });
@@ -42,41 +45,46 @@ class Photo extends Media {
         likes.appendChild(number);
         likes.appendChild(icon);
 
-        details.appendChild(title);
-        details.appendChild(likes);
+        caption.appendChild(title);
+        caption.appendChild(likes);
 
-        article.appendChild(img);
-        article.appendChild(details);
+        figure.appendChild(img);
+        figure.appendChild(caption);
 
-        article.addEventListener('click', () => {
-            openLightbox(this.id);
+        figure.addEventListener('click', e => {
+            let pointer = document.elementFromPoint(e.clientX, e.clientY);
+                if(pointer.classList.contains('likes-heart')) {
+                    return false;
+                }
+                openLightbox(this.id);
+
         });
-        article.addEventListener('keydown', e => {
+        figure.addEventListener('keydown', e => {
             if(e.code == 'Enter') {
                 openLightbox(this.id);
             }
         });
 
-        return article;
+        return figure;
     }
 
     buildLightbox() {
-        const article = document.createElement('article');
-        article.classList.add('lightbox-media');
-        article.setAttribute('id', `lightbox-${this.id}`);
+        const figure = document.createElement('figure');
+        figure.classList.add('lightbox-media');
+        figure.setAttribute('id', `lightbox-${this.id}`);
 
         const img = document.createElement('img');
         img.setAttribute('src', 'assets/images/'+this.image);
         img.setAttribute('alt', this.title);
 
-        const title = document.createElement('h2');
-        title.classList.add('litghtbox-caption');
-        title.innerText = this.title;
+        const caption = document.createElement('figcaption');
+        caption.classList.add('lightbox-caption');
+        caption.innerText = this.title;
 
 
-        article.appendChild(img);
-        article.appendChild(title);
+        figure.appendChild(img);
+        figure.appendChild(caption);
 
-        return article;
+        return figure;
     }
 }

@@ -1,3 +1,5 @@
+"use strict";
+
 class Video extends Media {
     constructor(data) {
         super(data);
@@ -5,11 +7,11 @@ class Video extends Media {
     }
 
     build() {
-        const article = document.createElement('article');
-        article.classList.add('media');
-        article.setAttribute('id', this.id);
-        article.setAttribute('tabindex', 0);
-        article.setAttribute('aria-label', this.video);
+        const figure = document.createElement('figure');
+        figure.classList.add('media');
+        figure.setAttribute('id', this.id);
+        figure.setAttribute('tabindex', 0);
+        figure.setAttribute('aria-label', this.video);
 
 
         const video = document.createElement('video');
@@ -18,8 +20,8 @@ class Video extends Media {
         const source = document.createElement('source');
         source.setAttribute('src', 'assets/video/'+this.video);
 
-        const details = document.createElement('div');
-        details.classList.add('media-details');
+        const caption = document.createElement('figcaption');
+        caption.classList.add('media-caption');
 
         const title = document.createElement('h2');
         title.classList.add('media-title');
@@ -43,47 +45,48 @@ class Video extends Media {
         likes.appendChild(number);
         likes.appendChild(icon);
 
-        details.appendChild(title);
-        details.appendChild(likes);
+        caption.appendChild(title);
+        caption.appendChild(likes);
 
         video.appendChild(source);
 
-        article.appendChild(video);
-        article.appendChild(details);
+        figure.appendChild(video);
+        figure.appendChild(caption);
 
-        article.addEventListener('click', () => {
+        figure.addEventListener('click', () => {
             openLightbox(this.id);
         });
-        article.addEventListener('keydown', e => {
+        figure.addEventListener('keydown', e => {
             if(e.code == 'Enter') {
                 openLightbox(this.id);
             }
         });
 
-        return article;
+        return figure;
     }
 
     buildLightbox() {
-        const article = document.createElement('article');
-        article.classList.add('lightbox-media');
-        article.setAttribute('id', `lightbox-${this.id}`);
+        const figure = document.createElement('figure');
+        figure.classList.add('lightbox-media');
+        figure.setAttribute('id', `lightbox-${this.id}`);
 
         const video = document.createElement('video');
         video.classList.add('media-content');
+        video.setAttribute('controls', '');
 
         const source = document.createElement('source');
         source.setAttribute('src', 'assets/video/'+this.video);
 
-        const title = document.createElement('h2');
-        title.classList.add('litghtbox-caption');
-        title.innerText = this.title;
+        const caption = document.createElement('figcaption');
+        caption.classList.add('lightbox-caption');
+        caption.innerText = this.title;
 
 
         video.appendChild(source);
 
-        article.appendChild(video);
-        article.appendChild(title);
+        figure.appendChild(video);
+        figure.appendChild(caption);
 
-        return article;
+        return figure;
     }
 }

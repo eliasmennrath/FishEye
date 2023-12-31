@@ -18,11 +18,10 @@
     align-items: center;
     justify-content: space-between;
     width: 40%;
-    height: 80%;
-    padding: 35px;
+    height: 90%;
+    padding: 20px 35px;
     background-color: #DB8876;
     border-radius: 5px;
-    overflow-y: scroll;
 
     position: absolute;
     top: 50%;
@@ -42,7 +41,7 @@
 }
 
 .modal header h2 {
-    font-size: 64px;
+    font-size: 50px;
     font-weight: normal;
     margin-top: 0;
     margin-bottom: 10px;
@@ -57,7 +56,7 @@ form {
 
 form label {
     color: #312E2E;
-    font-size: 36px;
+    font-size: 25px;
 }
 
 form div {
@@ -76,7 +75,7 @@ form input, form textarea {
 }
 
 form input {
-    height: 68px;
+    height: 50px;
 }
 
 form textarea {
@@ -101,4 +100,8 @@ form textarea {
 }
 .invalid ~ .invalid-msg {
     display: initial;
+}
+
+#contactForm .contact_button {
+    height: 60px;
 }

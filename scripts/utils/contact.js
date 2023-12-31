@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * Functions
  */
@@ -73,50 +75,6 @@ function removeError(id) {
 
 
 
-// Give the focus to the elements inside the contact modal
-function trapFocus (element, prevFocusableElement = document.activeElement) {
-  const focusableEls = Array.from(
-    element.querySelectorAll(
-      'button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="email"]:not([disabled])'
-    )
-  );
-
-  const firstFocusableEl = focusableEls[0];
-  const lastFocusableEl = focusableEls[focusableEls.length - 1];
-  let currentFocus = null;
-
-  firstFocusableEl.focus();
-  currentFocus = firstFocusableEl;
-
-  const handleFocus = e => {
-    e.preventDefault();
-    // if the focused element "lives" in your modal container then just focus it
-    if (focusableEls.includes(e.target)) {
-      currentFocus = e.target;
-    } else {
-      // you're out of the container
-      // if previously the focused element was the first element then focus the last 
-      // element - means you were using the shift key
-      if (currentFocus === firstFocusableEl) {
-        lastFocusableEl.focus();
-      } else {
-        // you previously were focused on the last element so just focus the first one
-        firstFocusableEl.focus();
-      }
-      // update the current focus var
-      currentFocus = document.activeElement;
-    }
-  };
-
-  document.addEventListener("focus", handleFocus, true);
-
-  return {
-    onClose: () => {
-      document.removeEventListener("focus", handleFocus, true);
-      prevFocusableElement.focus();
-    }
-  };
-}
 
 
 
@@ -125,6 +83,8 @@ function trapFocus (element, prevFocusableElement = document.activeElement) {
 /**
  * Code
  */
+
+
 const displayContact = document.getElementById('contact_button');
 const contactModal = document.getElementById('contact_modal');
 displayContact.addEventListener('click', () => {
@@ -151,7 +111,7 @@ form.addEventListener('submit', e => {
         // Print validation
         console.log(
             'Firstname => ' + document.getElementsByName('firstname')[0].value + '\n',
-            'Lastname => ' + document.getElementsByName('firstname')[0].value + '\n',
+            'Lastname => ' + document.getElementsByName('lastname')[0].value + '\n',
             'Email => ' + document.getElementsByName('email')[0].value + '\n',
             'Message => ' + document.getElementsByName('message')[0].value
         );

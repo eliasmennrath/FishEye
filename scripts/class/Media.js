@@ -1,3 +1,5 @@
+"use strict";
+
 class Media {
     constructor(data) {
         this.id = data.id;

@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * Functions
  */
@@ -38,7 +40,7 @@ function getMedia(medias, photographer) {
 
 // Display photographer's information
 function displayData(photographer) {
-    let { name, city, tagline, portrait } = photographer;
+    let { name, city, country, tagline, portrait } = photographer;
 
     const title = document.getElementById('name');
     const pLocation = document.getElementById('location');
@@ -46,7 +48,7 @@ function displayData(photographer) {
     const img = document.getElementById('profilePicture');
 
     title.innerText = name;
-    pLocation.innerText = city;
+    pLocation.innerText = city + ', ' + country;
     pTagline.innerText = tagline;
     img.setAttribute('src', 'assets/photographers/' + portrait);
     img.setAttribute('alt', 'Une photo de profil de ' + name);
@@ -63,13 +65,61 @@ function displayMedias(medias) {
 
 // Get the total likes
 function getLikes(medias) {
-    totalLikes = 0;
+    let totalLikes = 0;
     medias.forEach(media => {
         totalLikes = totalLikes + media.likes;
-    })
+    });
 
     return totalLikes;
 }
+
+
+// Give the focus to the elements inside a modal
+function trapFocus (element, prevFocusableElement = document.activeElement) {
+    const focusableEls = Array.from(
+        element.querySelectorAll(
+            'button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="email"]:not([disabled])'
+        )
+    );
+
+    const firstFocusableEl = focusableEls[0];
+    const lastFocusableEl = focusableEls[focusableEls.length - 1];
+    let currentFocus = null;
+
+    firstFocusableEl.focus();
+    currentFocus = firstFocusableEl;
+
+    const handleFocus = e => {
+        e.preventDefault();
+        // if the focused element "lives" in your modal container then just focus it
+        if (focusableEls.includes(e.target)) {
+            currentFocus = e.target;
+        } else {
+            // you're out of the container
+            // if previously the focused element was the first element then focus the last 
+            // element - means you were using the shift key
+            if (currentFocus === firstFocusableEl) {
+                lastFocusableEl.focus();
+            } else {
+                // you previously were focused on the last element so just focus the first one
+                firstFocusableEl.focus();
+            }
+            // update the current focus var
+            currentFocus = document.activeElement;
+        }
+    };
+
+    document.addEventListener("focus", handleFocus, true);
+
+    return {
+        onClose: () => {
+            document.removeEventListener("focus", handleFocus, true);
+            prevFocusableElement.focus();
+        }
+    };
+}
+
+
 
 
 
@@ -78,7 +128,6 @@ function getLikes(medias) {
 /**
  * Code
  */
-
 let medias = [];
 let index;
 

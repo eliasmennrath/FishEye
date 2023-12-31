@@ -1,3 +1,5 @@
+"use strict";
+
 // Build photographer's card in home page
 function photographerTemplate(data) {
     const { id, name, portrait, city, country, tagline, price } = data;

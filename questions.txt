@@ -1,3 +1,0 @@
-avoir le focus sur la modal de contact avec nav clavier
-
-garder le focus sur la page après seletion du filtre

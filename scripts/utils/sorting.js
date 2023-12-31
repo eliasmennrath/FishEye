@@ -1,6 +1,25 @@
+"use strict";
+
 /**
  * Functions
  */
+
+function initSorting() {
+    if(medias.length > 0) {
+        selectOption(document.getElementsByClassName('option')[0]);
+        clearInterval(fetchDelay);
+    }
+    return false;
+}
+
+function selectOption(option) {
+    sortMedias(option.getAttribute('data-sorting'), medias);
+    document.getElementById('textBox').value = option.textContent;
+    options.forEach(o => {
+        o.classList.remove('hide');
+    });
+    option.classList.add('hide');
+}
 
 function sortMedias(sorting, medias) {
     switch (sorting) {
@@ -48,6 +67,9 @@ function lostFocus(event) {
  * Code
  */
 
+const fetchDelay = setInterval(initSorting, 100);
+
+
 // Toggle the dropdown display when click
 const dropdown = document.getElementById('dropdown');
 dropdown.addEventListener('click', function() {
@@ -58,14 +80,24 @@ dropdown.addEventListener('click', function() {
 let options = Array.from(document.getElementsByClassName('option'));
 options.forEach(option => {
     option.addEventListener('click', () => {
-        sortMedias(option.getAttribute('data-sorting'), medias);
-        document.getElementById('textBox').value = option.textContent;
+        selectOption(option);
+        // sortMedias(option.getAttribute('data-sorting'), medias);
+        // document.getElementById('textBox').value = option.textContent;
+        // options.forEach(o => {
+        //     o.classList.remove('hide');
+        // });
+        // option.classList.add('hide');
     });
 
     option.addEventListener('keydown', e => {
         if(e.code == 'Enter') {
-            sortMedias(option.getAttribute('data-sorting'), medias);
-            document.getElementById('textBox').value = option.textContent;
+            selectOption(option);
+            // sortMedias(option.getAttribute('data-sorting'), medias);
+            // document.getElementById('textBox').value = option.textContent;
+            // options.forEach(o => {
+            //     o.classList.remove('hide');
+            // });
+            // option.classList.add('hide');
         }
     });
 });
@@ -107,7 +139,7 @@ dropdown.addEventListener('keydown', e => {
 
         case 'Escape':
             lostFocus(e);
-                dropdown.classList.remove('active')
+                dropdown.classList.remove('active');
             break;
 
         default:

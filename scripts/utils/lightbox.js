@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * Functions
  */
@@ -27,11 +29,14 @@ function openLightbox(id) {
             htmlMedias[i].classList.remove('active')
         }
     });
+    isVideo();
+
 }
 
 // Go to the next image ine the lightbox
 function lightboxNext() {
     index = (index + 1) % medias.length;
+    isVideo();
 
     let htmlMedias = Array.from(document.getElementsByClassName('lightbox-media'));
     htmlMedias.forEach((media, i) => {
@@ -46,6 +51,7 @@ function lightboxNext() {
 // Go to the previous image ine the lightbox
 function lightboxPrevious() {
     index = ((index || medias.length) - 1) % medias.length;
+    isVideo();
 
     let htmlMedias = Array.from(document.getElementsByClassName('lightbox-media'));
     htmlMedias.forEach((media, i) => {
@@ -63,12 +69,19 @@ function closeLightbox() {
 }
 
 
+function isVideo() {
+    let htmlMedias = Array.from(document.getElementsByClassName('lightbox-media'));
+    if(htmlMedias[index].getElementsByTagName('video').length > 0) {
+        htmlMedias[index].focus();
+    }
+}
 
 
 
 /**
  * Code
  */
+
 
 // Change lightbox content to the next media
 let next = document.getElementById('next-media');
@@ -90,22 +103,22 @@ lightboxClose.addEventListener('click', () => {
 
 // Keyboard navigation
 document.addEventListener('keydown', e => {
-        switch (e.code) {
-            case 'Escape':
-                closeLightbox();
-                break;
-            
-            case 'ArrowLeft':
-                lightboxPrevious();
-                break;
+    switch (e.code) {
+        case 'Escape':
+            closeLightbox();
+            break;
+        
+        case 'ArrowLeft':
+            lightboxPrevious();
+            break;
 
-            case 'ArrowRight':
-                lightboxNext();
-                break;
+        case 'ArrowRight':
+            lightboxNext();
+            break;
 
-            default:
-                break;
-        }
+        default:
+            break;
+    }
 });
 
 

@@ -94,7 +94,7 @@ displayContact.addEventListener('click', () => {
 
 const closeModalBtn = document.getElementById('close-modal');
 closeModalBtn.addEventListener('click', () => {
-  closeModal();
+    closeModal();
 });
 
 

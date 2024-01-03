@@ -130,7 +130,7 @@ main {
 	border: none;
 	outline: none;
 	box-shadow: 0 5px 20px rgba(0, 0, 0, .075);
-	padding: 12px 20px;
+	padding: 15px 25px;
 	border-radius: 5px;
 }
 
@@ -155,8 +155,7 @@ main {
 
 #dropdown #options .option {
 	width: 100%;
-	text-align: center;
-	padding: 12px 20px;
+	padding: 15px 25px;
 	cursor: pointer;
 }
 

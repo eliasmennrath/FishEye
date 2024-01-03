@@ -11,7 +11,7 @@ class Photo extends Media {
         figure.classList.add('media');
         figure.setAttribute('id', this.id);
         figure.setAttribute('tabindex', 0);
-        figure.setAttribute('aria-label', this.image);
+        // figure.setAttribute('aria-label', this.image);
 
         const img = document.createElement('img');
         img.setAttribute('src', 'assets/images/'+this.image);

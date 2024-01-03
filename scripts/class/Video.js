@@ -11,7 +11,7 @@ class Video extends Media {
         figure.classList.add('media');
         figure.setAttribute('id', this.id);
         figure.setAttribute('tabindex', 0);
-        figure.setAttribute('aria-label', this.video);
+        // figure.setAttribute('aria-label', this.video);
 
 
         const video = document.createElement('video');
